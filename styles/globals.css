@@ -2,3 +2,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  textarea::-webkit-scrollbar{
+    width: 10px;
+  }
+
+  textarea::-webkit-scrollbar-thumb{
+    background-color: white;
+  }

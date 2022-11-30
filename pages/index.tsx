@@ -17,6 +17,7 @@ export default function Home() {
           <Homebox
             colorOne={homebox.colorOne}
             colorTwo={homebox.colorTwo}
+            link={homebox.link}
             description={homebox.description}
             title={homebox.title}
             key={homebox.title}
