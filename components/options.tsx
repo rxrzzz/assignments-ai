@@ -29,7 +29,7 @@ export const Options = ({ option, setOption, color }: OptionProp) => {
                 }}
                 className="font-medium"
               >
-                Very fast / Less intelligent
+                Fast / Less intelligent
               </span>
             )}
           </RadioGroup.Option>

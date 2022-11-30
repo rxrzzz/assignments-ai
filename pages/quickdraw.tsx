@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { Navbar } from "../components/Navbar";
 import { Options } from "../components/options";
 import { homeboxes, openai } from "../utils";
 
@@ -23,18 +24,18 @@ export default function QuickDraw() {
       .createCompletion({
         model: option,
         prompt: `What are the key things I should know when studying about ${prompt}?. List them out.`,
-        max_tokens: 1200,
+        max_tokens: 400,
         temperature: 0,
       })
       .then((response) => {
         const { data } = response;
         setResult(data.choices[0].text);
         setLoading(false);
-        setError("")
+        setError("");
       })
       .catch((err) => {
         setError("An error occured. Please wait for a minute and then retry.");
-        setLoading(false)
+        setLoading(false);
       });
   }
 
@@ -42,6 +43,7 @@ export default function QuickDraw() {
     <main className="min-h-screen bg-slate-900 font-alpino text-white">
       <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
         <div className="lg:w-5/12 w-11/12 mx-auto">
+          <Navbar color={pageProps.colorOne} />
           <div className="flex">
             <div
               style={{ backgroundColor: pageProps.colorOne }}
