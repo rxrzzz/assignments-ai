@@ -35,6 +35,7 @@ export default function SimpleText() {
       })
       .catch((err) => {
         setError("An error occured. Please wait for a minute and then retry.");
+        setLoading(false)
       });
   }
 
