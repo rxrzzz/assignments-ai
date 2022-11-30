@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 
 import { useState } from "react";
+import { Navbar } from "../components/Navbar";
 import { homeboxes, openai } from "../utils";
 
 export default function SimpleText() {
@@ -25,6 +26,7 @@ export default function SimpleText() {
   return (
     <main className="min-h-screen bg-slate-900 font-alpino">
       <div className="max-w-[1200px] mx-auto pt-16">
+        <Navbar color={pageProps.colorOne} />
         <section className="flex justify-between items-center w-[95%] md:w-full mx-auto">
           <div
             style={{ backgroundColor: pageProps.colorOne }}

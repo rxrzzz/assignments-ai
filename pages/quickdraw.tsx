@@ -57,7 +57,7 @@ export default function QuickDraw() {
           </div>
           <div>
             <h1 className="font-medium text-lg mt-5">Example Prompt</h1>
-            <p className="mb-4">Germany.</p>
+            <p className="mb-4 border p-2 mt-2">Germany.</p>
           </div>
           <div>
             <h1 className="font-medium text-lg">Example Response</h1>
