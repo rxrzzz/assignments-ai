@@ -31,10 +31,11 @@ export default function Summarize() {
         const { data } = response;
         setResult(data.choices[0].text);
         setLoading(false);
+        setError("");
       })
       .catch((err) => {
         setError("An error occured. Please wait for a minute and then retry.");
-        setLoading(false)
+        setLoading(false);
       });
   }
 

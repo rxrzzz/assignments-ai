@@ -31,6 +31,7 @@ export default function Outline() {
         const { data } = response;
         setResult(data.choices[0].text);
         setLoading(false);
+        setError("")
       })
       .catch((err) => {
         setError("An error occured. Please wait for a minute and then retry.");

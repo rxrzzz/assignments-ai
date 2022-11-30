@@ -1,5 +1,4 @@
 import { RadioGroup } from "@headlessui/react";
-import { useState } from "react";
 
 type OptionProp = {
   option: string;
@@ -34,21 +33,7 @@ export const Options = ({ option, setOption, color }: OptionProp) => {
               </span>
             )}
           </RadioGroup.Option>
-          <RadioGroup.Option
-            className="my-4 cursor-pointer  max-w-[400px]"
-            value="text-babbage-001"
-          >
-            {({ checked }) => (
-              <span
-                style={{
-                  backgroundColor: checked ? color : "",
-                }}
-                className="font-medium"
-              >
-                Fast / Slightly Intelligent
-              </span>
-            )}
-          </RadioGroup.Option>
+
           <RadioGroup.Option
             className="my-4 cursor-pointer  max-w-[400px]"
             value="text-davinci-003"
