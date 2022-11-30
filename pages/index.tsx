@@ -11,7 +11,7 @@ export default function Home() {
       </div>
       <section
         className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1
-       max-w-[1400px] mx-auto mt-16 gap-12 justify-center items-center "
+       max-w-[1400px] mx-auto mt-16 gap-12 "
       >
         {homeboxes.map((homebox) => (
           <Homebox

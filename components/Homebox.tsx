@@ -15,19 +15,22 @@ export const Homebox = ({
 }: HomeboxProps) => {
   return (
     <Link href={"/"}>
-      <div className="flex  p-2 justify-evenly font-alpino mx-auto">
+      <div className="w-full">
         <aside
           style={{
-            background: `linear-gradient(to bottom,  ${colorOne} 0%,${colorTwo} 50%)`,
+            background: colorOne,
           }}
-          className="md:h-[150px] md:w-[150px] w-[100px] h-[100px] bg-gradient-to-r 
-      rounded-full
+          className="w-full pt-8 bg-gradient-to-r pb-3 
+          h-[150px]
       animate-gradient-y"
-        ></aside>
-        <main className="ml-4 w-7/12">
-          <h1 className="text-2xl font-medium underline">{title}</h1>
-          <p className="text-lg mt-2 font-medium opacity-90 ">{description}</p>
-        </main>
+        >
+          <main className="ml-4">
+            <h1 className="text-2xl font-medium leading-tight">{description}</h1>
+            <p className="text-lg mt-2 font-medium opacity-90 ">
+              {title}
+            </p>
+          </main>
+        </aside>
       </div>
     </Link>
   );

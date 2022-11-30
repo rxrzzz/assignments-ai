@@ -31,7 +31,7 @@ export const homeboxes: HomeboxProps[] = [
     title: "Extract keywords from a block of text.",
   },
   {
-    colorOne: "#ffffff",
+    colorOne: "#121212",
     colorTwo: "#abbaab",
     description: "Translate English",
     title: "Translate English text to French, Spanish and Japanese.",
