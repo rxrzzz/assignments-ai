@@ -16,7 +16,7 @@ export default function SimpleText() {
         'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with "I do not have an answer to that question".' +
         "\n" +
         `Q:${prompt}`,
-      max_tokens: 300,
+      max_tokens: 500,
       temperature: 1,
     });
     setResult(data.choices[0].text);

@@ -15,6 +15,11 @@ const configuration = new Configuration({
 
 export const openai = new OpenAIApi(configuration);
 
+export const options = [
+  "Fast and intelligent responses",
+  "Very fast but not so intelligent responses",
+  "Slow but highly intelligent responses",
+]
 export const homeboxes: HomeboxProps[] = [
   {
     colorTwo: "#00c6ff",

@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        alpino: ['Alpino', 'sans-serif']
+        alpino: ['Satoshi', 'sans-serif']
       }
     },
   },
