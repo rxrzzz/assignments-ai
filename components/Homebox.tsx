@@ -27,10 +27,10 @@ export const Homebox = ({
       "
         >
           <main className="ml-4">
-            <h1 className="text-2xl font-medium leading-tight">
+            <h1 className="text-2xl font-bold leading-tight">
               {description}
             </h1>
-            <p className="text-lg mt-2 font-medium opacity-90 ">{title}</p>
+            <p className="text-lg mt-2 font-medium opacity-80 ">{title}</p>
           </main>
         </aside>
       </div>
