@@ -1,6 +1,6 @@
-import { RadioGroup } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { Options } from "../components/options";
 import { homeboxes, openai } from "../utils";
 
 export default function QuickDraw() {
@@ -8,12 +8,16 @@ export default function QuickDraw() {
   const pageProps = homeboxes.find((homebox) => homebox.link === pathname)!;
   const [option, setOption] = useState("text-ada-001");
 
+  const changeOption = (inputOption: string) => {
+    setOption(inputOption);
+  };
+
   const [prompt, setPrompt] = useState<string | undefined>("");
   const [result, setResult] = useState<string | undefined>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  async function summarizeData() {
+  async function quickDrawData() {
     setLoading(true);
     await openai
       .createCompletion({
@@ -74,64 +78,11 @@ export default function QuickDraw() {
               from.
             </p>
           </div>
-          <div>
-            <RadioGroup
-              value={option}
-              onChange={setOption}
-              className="my-8 text-xl text-white"
-            >
-              <RadioGroup.Label className="text-2xl font-bold ">
-                Response Options:
-              </RadioGroup.Label>
-              <div className="grid grid-cols-3">
-                <RadioGroup.Option
-                  className="my-4 cursor-pointer  max-w-[400px] mt-4"
-                  value="text-ada-001"
-                >
-                  {({ checked }) => (
-                    <span
-                      style={{
-                        backgroundColor: checked ? pageProps.colorOne : "",
-                      }}
-                      className="font-medium"
-                    >
-                      Very fast / Less intelligent
-                    </span>
-                  )}
-                </RadioGroup.Option>
-                <RadioGroup.Option
-                  className="my-4 cursor-pointer  max-w-[400px]"
-                  value="Moderately fast and pretty intelligent responses"
-                >
-                  {({ checked }) => (
-                    <span
-                      style={{
-                        backgroundColor: checked ? pageProps.colorOne : "",
-                      }}
-                      className="font-medium"
-                    >
-                      Fast / Slightly Intelligent
-                    </span>
-                  )}
-                </RadioGroup.Option>
-                <RadioGroup.Option
-                  className="my-4 cursor-pointer  max-w-[400px]"
-                  value="text-davinci-003"
-                >
-                  {({ checked }) => (
-                    <span
-                      style={{
-                        backgroundColor: checked ? pageProps.colorOne : "",
-                      }}
-                      className="font-medium"
-                    >
-                      Slow / Highly Intelligent.
-                    </span>
-                  )}
-                </RadioGroup.Option>
-              </div>
-            </RadioGroup>
-          </div>
+          <Options
+            color={pageProps.colorOne}
+            option={option}
+            setOption={changeOption}
+          />
           <textarea
             maxLength={200}
             placeholder="Enter the topic you want to generate study notes from here (200 characters max)"
@@ -140,7 +91,7 @@ export default function QuickDraw() {
           ></textarea>
           {!loading ? (
             <button
-              onClick={summarizeData}
+              onClick={quickDrawData}
               style={{ backgroundColor: pageProps.colorOne }}
               className=" text-white px-2 py-1 text-xl mt-4 rounded-sm"
             >
@@ -148,7 +99,7 @@ export default function QuickDraw() {
             </button>
           ) : (
             <button
-              onClick={summarizeData}
+              onClick={quickDrawData}
               disabled
               style={{ backgroundColor: pageProps.colorOne }}
               className=" text-white px-2 py-1 text-xl mt-4 rounded-sm opacity-90"
