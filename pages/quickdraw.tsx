@@ -55,7 +55,7 @@ export default function QuickDraw() {
                 <h1 className="lg:text-5xl md:text-5xl text-4xl font-bold">
                   {pageProps.description}
                 </h1>
-                <p className="md:text-xl text-md">{pageProps.title}</p>
+                <p className="md:text-xl text-md mt-2">{pageProps.title}</p>
               </div>
             </div>
           </div>
@@ -111,12 +111,21 @@ export default function QuickDraw() {
         <div className="lg:w-5/12 w-11/12 mx-auto">
           <h1 className="text-3xl font-bold mt-16">Response</h1>
           {result !== "" ? (
-            <div
-              className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none mt-8"
-              dangerouslySetInnerHTML={{
-                __html: `<p>${result}</p>`,
-              }}
-            ></div>
+            <>
+              <button
+                onClick={() => window.navigator.clipboard.writeText(result!)}
+                className="mb-3 self-end mt-8 p-2 font-medium"
+                style={{ backgroundColor: pageProps.colorOne }}
+              >
+                Copy Text
+              </button>
+              <div
+                className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none "
+                dangerouslySetInnerHTML={{
+                  __html: `<p>${result}</p>`,
+                }}
+              ></div>
+            </>
           ) : null}
           {error !== "" ? (
             <div
