@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { Navbar } from "../components/Navbar";
 import { Options } from "../components/options";
 import { homeboxes, openai } from "../utils";
 
@@ -23,7 +24,7 @@ export default function Summarize() {
       .createCompletion({
         model: option,
         prompt: prompt + `\n\n` + "tl;dr",
-        max_tokens: 1000,
+        max_tokens: 800,
         temperature: 1,
       })
       .then((response) => {
@@ -40,6 +41,7 @@ export default function Summarize() {
     <main className="min-h-screen bg-slate-900 font-alpino text-white">
       <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
         <div className="lg:w-5/12 w-11/12 mx-auto">
+          <Navbar color={pageProps.colorOne} />
           <div className="flex">
             <div
               style={{ backgroundColor: pageProps.colorOne }}
@@ -55,27 +57,31 @@ export default function Summarize() {
                 <h1 className="lg:text-5xl md:text-5xl text-4xl font-bold">
                   {pageProps.description}
                 </h1>
-                <p className="md:text-xl text-md">{pageProps.title}</p>
+                <p className="md:text-xl text-md mt-2">{pageProps.title}</p>
               </div>
             </div>
           </div>
           <div>
             <h1 className="font-medium text-lg mt-5">Example Prompt</h1>
-            <p className="mb-4 border p-2 mt-2">Germany.</p>
+            <p className="mb-4 border p-2 mt-2">
+              My transformation began with my mom’s cancer diagnosis. My mom
+              went on a 100% whole food plant-based diet. I fully embraced this
+              new eating philosophy to show my support. Eager to figure out the
+              whole “vegan” thing, the two of us started binge-watching health
+              documentaries such as “What the Health” and “Forks Over Knives”.
+              We read all the books by the featured doctors like “The China
+              Study” and “How Not To Die”. I became entranced by the world of
+              nutritional science and how certain foods could help prevent
+              cancer or boost metabolism.{" "}
+            </p>
           </div>
           <div>
             <h1 className="font-medium text-lg">Example Response</h1>
             <p className="mb-4 border p-2 mt-2">
-              1. Germany is a country in Europe that is known for its
-              engineering and engineering interests. 2. Germany is also known
-              for its military might, with the country having an army of over 1
-              million soldiers and sailors. 3. Germany is also known for its
-              culture, with a wide variety of cultures represented in the
-              country art and literature. 4. Germany is also known for its food,
-              with many different types of dishes being available in a variety
-              of shapes and flavors. 5. Germany is also known for its music,
-              with the country having a number of popular artists to choose
-              from.
+              My transformation started when my mom was diagnosed with cancer.
+              We embraced a whole food plant-based diet and dove into learning
+              about nutrition science and how food can help fight cancer and
+              other illnesses.
             </p>
           </div>
           <Options
@@ -84,8 +90,7 @@ export default function Summarize() {
             setOption={changeOption}
           />
           <textarea
-            maxLength={200}
-            placeholder="Enter the topic you want to generate study notes from here (200 characters max)"
+            placeholder="Enter the text you want to generate a response for here."
             className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none"
             onChange={(e) => setPrompt(e.target.value)}
           ></textarea>
@@ -95,7 +100,7 @@ export default function Summarize() {
               style={{ backgroundColor: pageProps.colorOne }}
               className=" text-white px-2 py-1 text-xl mt-4 rounded-sm"
             >
-              Generate Points.
+              Summarize Text
             </button>
           ) : (
             <button
@@ -111,12 +116,21 @@ export default function Summarize() {
         <div className="lg:w-5/12 w-11/12 mx-auto">
           <h1 className="text-3xl font-bold mt-16">Response</h1>
           {result !== "" ? (
-            <div
-              className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none mt-8"
-              dangerouslySetInnerHTML={{
-                __html: `<p>${result}</p>`,
-              }}
-            ></div>
+            <>
+              <button
+                onClick={() => window.navigator.clipboard.writeText(result!)}
+                className="mb-3 self-end mt-8 p-2 font-medium"
+                style={{ backgroundColor: pageProps.colorOne }}
+              >
+                Copy Text
+              </button>
+              <div
+                className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none "
+                dangerouslySetInnerHTML={{
+                  __html: `<p>${result}</p>`,
+                }}
+              ></div>
+            </>
           ) : null}
           {error !== "" ? (
             <div
