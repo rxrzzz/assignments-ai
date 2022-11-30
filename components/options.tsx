@@ -29,11 +29,25 @@ export const Options = ({ option, setOption, color }: OptionProp) => {
                 }}
                 className="font-medium"
               >
-                Fast / Less intelligent
+                Very fast / Less intelligent
               </span>
             )}
           </RadioGroup.Option>
-
+          <RadioGroup.Option
+            className="my-4 cursor-pointer  max-w-[400px]"
+            value="text-curie-001"
+          >
+            {({ checked }) => (
+              <span
+                style={{
+                  backgroundColor: checked ? color : "",
+                }}
+                className="font-medium"
+              >
+                Fast / Slightly Intelligent
+              </span>
+            )}
+          </RadioGroup.Option>
           <RadioGroup.Option
             className="my-4 cursor-pointer  max-w-[400px]"
             value="text-davinci-003"

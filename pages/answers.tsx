@@ -37,7 +37,9 @@ export default function Extract() {
         setError("");
       })
       .catch((err) => {
-        setError("An error occured. Please wait for a minute and then retry.");
+        setError(
+          "An error occured. Please wait for a minute and then retry or choose another response type."
+        );
         setLoading(false);
       });
   }
