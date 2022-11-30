@@ -72,7 +72,7 @@ export default function Summarize() {
               We read all the books by the featured doctors like “The China
               Study” and “How Not To Die”. I became entranced by the world of
               nutritional science and how certain foods could help prevent
-              cancer or boost metabolism.{" "}
+              cancer or boost metabolism.
             </p>
           </div>
           <div>
