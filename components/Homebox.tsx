@@ -14,7 +14,7 @@ export const Homebox = ({
   title,
 }: HomeboxProps) => {
   return (
-    <Link href={"/"}>
+    <Link href={"/"} className="w-[95%] md:w-full mx-auto">
       <div className="w-full">
         <aside
           style={{

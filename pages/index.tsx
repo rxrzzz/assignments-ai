@@ -3,7 +3,7 @@ import { homeboxes } from "../utils/index";
 
 export default function Home() {
   return (
-    <main className=" text-white min-h-screen bg-slate-900 font-alpino">
+    <main className=" text-white min-h-screen bg-slate-900 font-alpino pb-18">
       <div className="text-center mx-auto">
         <h1 className="py-12 xl:text-9xl lg:text-7xl md:text-6xl text-5xl font-bold uppercase">
           Assignments AI
