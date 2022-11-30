@@ -130,7 +130,7 @@ export default function Extract() {
             <div
               className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none mt-8"
               dangerouslySetInnerHTML={{
-                __html: `<p>${error}</p>`,
+                __html: `<p className="bg-red-500">${error}</p>`,
               }}
             ></div>
           ) : null}
