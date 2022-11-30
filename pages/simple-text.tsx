@@ -25,7 +25,7 @@ export default function SimpleText() {
         model: option,
         prompt:
           "Explain this text to a high school student:" + "\n" + `${prompt}`,
-        max_tokens: 1500,
+        max_tokens: 800,
         temperature: 1,
       })
       .then((response) => {

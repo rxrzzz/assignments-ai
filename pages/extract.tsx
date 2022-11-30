@@ -25,7 +25,7 @@ export default function Extract() {
         model: option,
         prompt:
           "Extract the keywords from the following text:" + "\n" + `${prompt}`,
-        max_tokens: 400,
+        max_tokens: 200,
         temperature: 1,
       })
       .then((response) => {

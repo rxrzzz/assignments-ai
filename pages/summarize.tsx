@@ -24,7 +24,7 @@ export default function Summarize() {
       .createCompletion({
         model: option,
         prompt: prompt + `\n\n` + "tl;dr",
-        max_tokens: 800,
+        max_tokens: 600,
         temperature: 1,
       })
       .then((response) => {
