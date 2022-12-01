@@ -25,10 +25,10 @@ export default function Extract() {
       .createCompletion({
         model: option,
         prompt:
-          'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you a short and concise answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with "I do not have an answer to that question".' +
+          'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you a short and concise answer in one sentence. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with "I do not have an answer to that question".' +
           "\n" +
           `Q:${prompt}`,
-        max_tokens: 200,
+        max_tokens: 150,
         temperature: 1,
       })
       .then((response) => {
