@@ -14,12 +14,15 @@ export const Options = ({ option, setOption, color }: OptionProp) => {
         onChange={setOption}
         className="my-8 text-xl text-white"
       >
-        <RadioGroup.Label className="text-2xl font-bold ">
+        <RadioGroup.Label
+          className="text-xl font-medium underline"
+          style={{ textDecorationColor: color }}
+        >
           Response Options:
         </RadioGroup.Label>
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-1  gap-1">
           <RadioGroup.Option
-            className="my-4 cursor-pointer  max-w-[400px] mt-4"
+            className=" cursor-pointer   max-w-[400px] mt-4"
             value="text-ada-001"
           >
             {({ checked }) => (
@@ -27,14 +30,14 @@ export const Options = ({ option, setOption, color }: OptionProp) => {
                 style={{
                   backgroundColor: checked ? color : "",
                 }}
-                className="font-medium"
+                className="text-md p-1 rounded-sm"
               >
-                Very fast / Less intelligent
+                fast / less intelligent.
               </span>
             )}
           </RadioGroup.Option>
           <RadioGroup.Option
-            className="my-4 cursor-pointer  max-w-[400px]"
+            className=" cursor-pointer   max-w-[400px]"
             value="text-curie-001"
           >
             {({ checked }) => (
@@ -42,14 +45,14 @@ export const Options = ({ option, setOption, color }: OptionProp) => {
                 style={{
                   backgroundColor: checked ? color : "",
                 }}
-                className="font-medium"
+                className="text-md p-1 rounded-sm"
               >
-                Fast / Slightly Intelligent
+                moderate / slightly intelligent.
               </span>
             )}
           </RadioGroup.Option>
           <RadioGroup.Option
-            className="my-4 cursor-pointer  max-w-[400px]"
+            className=" cursor-pointer  max-w-[400px]"
             value="text-davinci-003"
           >
             {({ checked }) => (
@@ -57,9 +60,9 @@ export const Options = ({ option, setOption, color }: OptionProp) => {
                 style={{
                   backgroundColor: checked ? color : "",
                 }}
-                className="font-medium"
+                className="text-md p-1 rounded-sm"
               >
-                Slow / Highly Intelligent.
+                slow / highly intelligent.
               </span>
             )}
           </RadioGroup.Option>

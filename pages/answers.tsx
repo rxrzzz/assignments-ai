@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { Options } from "../components/options";
+import { Prompt } from "../components/Prompt";
 import { homeboxes, openai } from "../utils";
 
 export default function Extract() {
@@ -49,7 +50,14 @@ export default function Extract() {
       <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
         <div className="lg:w-5/12 w-11/12 mx-auto">
           <Navbar color={pageProps.colorOne} />
-
+          <Prompt
+            colorOne={pageProps.colorOne}
+            description={pageProps.description}
+            exampleAnswer={"A: Humans have two legs."}
+            examplePrompt={"How many legs do humans have?"}
+            no={pageProps.no}
+            title={pageProps.title}
+          />
           <Options
             color={pageProps.colorOne}
             option={option}

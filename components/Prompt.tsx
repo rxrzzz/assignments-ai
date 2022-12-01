@@ -17,7 +17,7 @@ export const Prompt = ({
 }: PromptProps) => {
   return (
     <>
-      <div className="flex">
+      <div className="flex items-center">
         <div
           style={{ backgroundColor: colorOne }}
           className="lg:h-[110px] lg:w-[110px] h-[100px] w-[100px]
@@ -25,11 +25,11 @@ export const Prompt = ({
    mr-6
     justify-center"
         >
-          <h1>{no}</h1>
+          <span>{no}</span>
         </div>
         <div>
-          <div className="text-white max-w-[280px]">
-            <h1 className="lg:text-5xl md:text-5xl text-4xl font-bold">
+          <div className="text-white max-w-[300px]">
+            <h1 className="lg:text-4xl text-3xl font-bold">
               {description}
             </h1>
             <p className="md:text-xl text-md mt-2">{title}</p>

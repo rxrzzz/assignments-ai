@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { Options } from "../components/options";
+import { Prompt } from "../components/Prompt";
 import { homeboxes, openai } from "../utils";
 
 export default function Grammar() {
@@ -31,13 +32,13 @@ export default function Grammar() {
         const { data } = response;
         setResult(data.choices[0].text);
         setLoading(false);
-        setError("")
+        setError("");
       })
       .catch((err) => {
         setError(
-            "An error occured. Please wait for a minute and then retry or choose another response type."
-          );
-        setLoading(false)
+          "An error occured. Please wait for a minute and then retry or choose another response type."
+        );
+        setLoading(false);
       });
   }
 
@@ -46,33 +47,14 @@ export default function Grammar() {
       <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
         <div className="lg:w-5/12 w-11/12 mx-auto">
           <Navbar color={pageProps.colorOne} />
-          <div className="flex">
-            <div
-              style={{ backgroundColor: pageProps.colorOne }}
-              className="lg:h-[110px] lg:w-[110px] h-[100px] w-[100px]
-       rounded-sm text-white text-6xl flex items-center shadow-md
-       mr-6
-        justify-center"
-            >
-              <h1>{pageProps.no}</h1>
-            </div>
-            <div>
-              <div className="text-white max-w-[280px]">
-                <h1 className="lg:text-5xl md:text-5xl text-4xl font-bold">
-                  {pageProps.description}
-                </h1>
-                <p className="md:text-xl text-md mt-2">{pageProps.title}</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h1 className="font-medium text-lg mt-5">Example Prompt</h1>
-            <p className="mb-4 border p-2 mt-2">I is not have many sense.</p>
-          </div>
-          <div>
-            <h1 className="font-medium text-lg">Example Response</h1>
-            <p className="mb-4 border p-2 mt-2">I do not have much sense.</p>
-          </div>
+          <Prompt
+            colorOne={pageProps.colorOne}
+            description={pageProps.description}
+            exampleAnswer="I do not have sense."
+            examplePrompt="I is not have sense."
+            no={pageProps.no}
+            title={pageProps.title}
+          />
           <Options
             color={pageProps.colorOne}
             option={option}
@@ -123,11 +105,11 @@ export default function Grammar() {
           ) : null}
           {error !== "" ? (
             <div
-            className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none mt-8"
-            dangerouslySetInnerHTML={{
-              __html: `<p className="bg-red-500">${error}</p>`,
-            }}
-          ></div>
+              className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none mt-8"
+              dangerouslySetInnerHTML={{
+                __html: `<p className="bg-red-500">${error}</p>`,
+              }}
+            ></div>
           ) : null}
         </div>
       </div>
