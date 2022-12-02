@@ -20,9 +20,9 @@ export default function Math() {
       .createCompletion({
         model: "text-davinci-003",
         prompt:
-          "I am a bot. I am highly profecient in solving mathematical related problems and equations. I am profecient in algebra, calculus and trigonometry." +
+          "I am a bot. I am highly profecient in solving mathematical related problems and equations. I am profecient in algebra, calculus, trigonometry and other math related topics." +
           "\n" +
-          'Explain step by step how to arrive at the answer to this math question. Seperate each step by "###". If the question given is not math related, i return "I only answer math questions.": ' +
+          'Explain step by step how to arrive at the answer to this math question. Seperate each step by \"###\" ": ' +
           `${prompt}`,
         max_tokens: 1000,
         temperature: 1,
