@@ -41,13 +41,13 @@ export default function Essay() {
 
   return (
     <main
-      className=" font-alpino "
+      className=" font-alpino min-h-screen"
       style={{
         background: `linear-gradient(to bottom, ${pageProps.colorOne} 1%, #eee 10%, #eee 100%)`,
       }}
     >
       <div className="max-w-[1600px] py-16 flex justify-between mx-auto flex-wrap w-[95%] ">
-        <div className="lg:w-5/12 w-11/12 mx-auto sticky top-0">
+        <div className="lg:w-5/12 w-11/12 mx-auto">
           <Navbar color={pageProps.colorOne} />
           <Prompt
             colorOne={pageProps.colorOne}
@@ -79,7 +79,7 @@ export default function Essay() {
               style={{ backgroundColor: pageProps.colorOne }}
               className=" text-white px-2 py-1 text-xl mt-4 rounded-sm"
             >
-              Write Essay
+              Correct Text
             </button>
           ) : (
             <button
@@ -97,12 +97,8 @@ export default function Essay() {
           {result !== "" ? (
             <>
               <button
-                onClick={() =>
-                  window.navigator.clipboard.writeText(
-                    result!.replaceAll("###", "")
-                  )
-                }
-                className="mb-3 self-end mt-8 p-2 text-white font-medium"
+                onClick={() => window.navigator.clipboard.writeText(result!)}
+                className="mb-3 self-end mt-8 p-2 font-medium text-white"
                 style={{ backgroundColor: pageProps.colorOne }}
               >
                 Copy Text
@@ -110,7 +106,7 @@ export default function Essay() {
               <div
                 className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none "
                 dangerouslySetInnerHTML={{
-                  __html: `<p>${result?.replaceAll("###", "<br/><br/>")}</p>`,
+                  __html: `<p>${result}</p>`,
                 }}
               ></div>
             </>
