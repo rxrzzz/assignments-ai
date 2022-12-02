@@ -2,23 +2,19 @@ import { Homebox } from "../components/Homebox";
 import { homeboxes } from "../utils/index";
 
 export default function Home() {
-  const colorOne =
-    homeboxes[Math.floor(Math.random() * homeboxes.length)].colorOne;
-  const colorTwo =
-    homeboxes[Math.floor(Math.random() * homeboxes.length)].colorTwo;
   return (
-    <main className=" text-white min-h-screen bg-slate-900 font-alpino">
-      <div className="text-center mx-auto max-w-[1000px]  md:py-10 py-6">
-        <h1 className="lg:py-12  xl:text-9xl lg:text-7xl md:text-6xl text-5xl font-bold ">
-          <span style={{ color: colorOne }}>homework</span>
-          <span style={{ color: colorTwo }}>.ai</span>
+    <main className="  min-h-screen bg-[#eee] font-alpino">
+      <div className="mx-auto max-w-[1600px]  flex w-[95%]">
+        <h1 className="lg:py-12  xl:text-7xl lg:text-7xl md:text-6xl text-5xl font-bold ">
+          <span className="block text-[#222]">home</span>
+          <span className="block text-[#222]">work</span>
+          <span>.ai</span>
         </h1>
-        <p>Working on your assignments does not get easier than this!</p>
       </div>
-      <div className="pb-24">
+      <div className="md:pb-10 lg:pb-0">
         <section
-          className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1
-       max-w-[1400px] mx-auto mt-16 lg:gap-20 md:gap-12 gap-6"
+          className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 w-[95%]
+       max-w-[1600px] mx-auto mt-16 lg:gap-20 md:gap-12 gap-6"
         >
           {homeboxes.map((homebox) => (
             <Homebox

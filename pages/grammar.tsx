@@ -23,8 +23,13 @@ export default function Grammar() {
     setLoading(true);
     await openai
       .createCompletion({
-        model: option,
-        prompt: "Correct this to standard English:" + "\n" + `${prompt}`,
+        model: "text-davinci-003",
+        prompt:
+          "I'm a highly intelligent bot with profound profeciency in fixing spelling or grammatical mistakes in English words or sentences." +
+          "\n" +
+          "Correct this to standard English:" +
+          "\n" +
+          `${prompt}`,
         max_tokens: 1000,
         temperature: 0,
       })
@@ -43,8 +48,13 @@ export default function Grammar() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-900 font-alpino text-white">
-      <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
+    <main
+      className=" font-alpino min-h-screen"
+      style={{
+        background: `linear-gradient(to bottom, ${pageProps.colorOne} 1%, #eee 10%, #eee 100%)`,
+      }}
+    >
+      <div className="max-w-[1600px] py-16 flex justify-between mx-auto flex-wrap w-[95%] ">
         <div className="lg:w-5/12 w-11/12 mx-auto">
           <Navbar color={pageProps.colorOne} />
           <Prompt
@@ -55,13 +65,9 @@ export default function Grammar() {
             no={pageProps.no}
             title={pageProps.title}
           />
-          <Options
-            color={pageProps.colorOne}
-            option={option}
-            setOption={changeOption}
-          />
+
           <textarea
-            placeholder="Enter the text you want to generate a simplified version for here."
+            placeholder="Enter the text you want to generate a gramatically correct version for here."
             className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none"
             onChange={(e) => setPrompt(e.target.value)}
           ></textarea>
@@ -90,7 +96,7 @@ export default function Grammar() {
             <>
               <button
                 onClick={() => window.navigator.clipboard.writeText(result!)}
-                className="mb-3 self-end mt-8 p-2 font-medium"
+                className="mb-3 self-end mt-8 p-2 font-medium text-white"
                 style={{ backgroundColor: pageProps.colorOne }}
               >
                 Copy Text
@@ -105,9 +111,9 @@ export default function Grammar() {
           ) : null}
           {error !== "" ? (
             <div
-              className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none mt-8"
+              className="min-h-[150px] text-xl p-2 w-full resize-none mt-8 bg-red-500 text-white"
               dangerouslySetInnerHTML={{
-                __html: `<p className="bg-red-500">${error}</p>`,
+                __html: `<p>${error}</p>`,
               }}
             ></div>
           ) : null}

@@ -46,7 +46,7 @@ export default function Extract() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-900 font-alpino text-white">
+    <main className="min-h-screen  font-alpino text-white bg-[#0c0c0c]">
       <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
         <div className="lg:w-5/12 w-11/12 mx-auto">
           <Navbar color={pageProps.colorOne} />
@@ -108,9 +108,9 @@ export default function Extract() {
           ) : null}
           {error !== "" ? (
             <div
-              className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none mt-8"
+              className="min-h-[150px] text-xl p-2 w-full resize-none mt-8 bg-red-500 text-white"
               dangerouslySetInnerHTML={{
-                __html: `<p className="bg-red-500">${error}</p>`,
+                __html: `<p>${error}</p>`,
               }}
             ></div>
           ) : null}

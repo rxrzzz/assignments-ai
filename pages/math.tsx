@@ -5,28 +5,26 @@ import { Options } from "../components/options";
 import { Prompt } from "../components/Prompt";
 import { homeboxes, openai } from "../utils";
 
-export default function Extract() {
+export default function Math() {
   const { pathname } = useRouter();
   const pageProps = homeboxes.find((homebox) => homebox.link === pathname)!;
-  const [option, setOption] = useState("text-ada-001");
-
-  const changeOption = (inputOption: string) => {
-    setOption(inputOption);
-  };
 
   const [prompt, setPrompt] = useState<string | undefined>("");
   const [result, setResult] = useState<string | undefined>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  async function extractKeywords() {
+  async function solveMath() {
     setLoading(true);
     await openai
       .createCompletion({
-        model: option,
+        model: "text-davinci-003",
         prompt:
-          "Extract the keywords from the following text:" + "\n" + `${prompt}`,
-        max_tokens: 200,
+          "I am a bot. I am highly profecient in solving mathematical related problems and equations. I am profecient in algebra, calculus and trigonometry." +
+          "\n" +
+          'Explain step by step how to arrive at the answer to this math question. Seperate each step by "###": ' +
+          `${prompt}`,
+        max_tokens: 1000,
         temperature: 1,
       })
       .then((response) => {
@@ -44,28 +42,32 @@ export default function Extract() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-900 font-alpino text-white">
-      <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
+    <main
+      className=" font-alpino min-h-screen"
+      style={{
+        background: `linear-gradient(to bottom, ${pageProps.colorOne} 1%, #eee 10%, #eee 100%)`,
+      }}
+    >
+      <div className="max-w-[1600px] py-16 flex justify-between mx-auto flex-wrap w-[95%] ">
         <div className="lg:w-5/12 w-11/12 mx-auto">
           <Navbar color={pageProps.colorOne} />
           <Prompt
             colorOne={pageProps.colorOne}
             description={pageProps.description}
-            exampleAnswer="cells, multicellular organisms, mitochondria, mature mammalian red
-            blood cells, unicellular organisms, microsporidia, parabasalids,
-            diplomonads"
-            examplePrompt="Some cells in some multicellular organisms lack mitochondria (for
-              example, mature mammalian red blood cells). A large number of
-              unicellular organisms, such as microsporidia, parabasalids and
-              diplomonads, have reduced or transformed their mitochondria into
-              other structures."
+            exampleAnswer="Step 1: To solve this question, use the antiderivative (or indefinite integral) to solve for the value.
+
+            Step 2: The antiderivative of 8x^3 is 8/4 x^4, so the equation is ∫ 8x^3 dx = 8/4 x^4 + C (where C is the constant of integration).
+            
+            Step 3: Plug in the upper and lower limits of the integral (in this case, it is just x).
+            
+            Step 4: Substitute for the limits of integration into the equation: 8/4 x^4 + C.
+            
+            Step 5: Solve for C by subtracting the lower limit (in this case, x) from both sides of the equation.
+            
+            Step 6: The answer should be: 8/4 x^4 − x."
+            examplePrompt="What is the value of ∫ 8 x3 dx."
             no={pageProps.no}
             title={pageProps.title}
-          />
-          <Options
-            color={pageProps.colorOne}
-            option={option}
-            setOption={changeOption}
           />
           <textarea
             placeholder="Enter the text you want to generate a simplified version for here."
@@ -74,15 +76,15 @@ export default function Extract() {
           ></textarea>
           {!loading ? (
             <button
-              onClick={extractKeywords}
+              onClick={solveMath}
               style={{ backgroundColor: pageProps.colorOne }}
               className=" text-white px-2 py-1 text-xl mt-4 rounded-sm"
             >
-              Extract Keywords
+              Solve Question.
             </button>
           ) : (
             <button
-              onClick={extractKeywords}
+              onClick={solveMath}
               disabled
               style={{ backgroundColor: pageProps.colorOne }}
               className=" text-white px-2 py-1 text-xl mt-4 rounded-sm opacity-90"
@@ -96,8 +98,12 @@ export default function Extract() {
           {result !== "" ? (
             <>
               <button
-                onClick={() => window.navigator.clipboard.writeText(result!)}
-                className="mb-3 self-end mt-8 p-2 font-medium"
+                onClick={() =>
+                  window.navigator.clipboard.writeText(
+                    result!.replaceAll("###", "    ")
+                  )
+                }
+                className="mb-3 self-end mt-8 p-2 font-medium text-white"
                 style={{ backgroundColor: pageProps.colorOne }}
               >
                 Copy Text
@@ -105,16 +111,16 @@ export default function Extract() {
               <div
                 className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none "
                 dangerouslySetInnerHTML={{
-                  __html: `<p>${result}</p>`,
+                  __html: `<p>${result?.replaceAll("###", "<br/></br/>")}</p>`,
                 }}
               ></div>
             </>
           ) : null}
           {error !== "" ? (
             <div
-              className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none mt-8"
+              className="min-h-[150px] text-xl p-2 w-full resize-none mt-8 bg-red-500 text-white"
               dangerouslySetInnerHTML={{
-                __html: `<p className="bg-red-500">${error}</p>`,
+                __html: `<p>${error}</p>`,
               }}
             ></div>
           ) : null}

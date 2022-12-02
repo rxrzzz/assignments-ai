@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        alpino: ['General Sans', 'sans-serif']
+        alpino: ['Clash Grotesk', 'sans-serif']
       }
     },
   },

@@ -1,18 +1,12 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Navbar } from "../components/Navbar";
-import { Options } from "../components/options";
 import { Prompt } from "../components/Prompt";
 import { homeboxes, openai } from "../utils";
 
 export default function Essay() {
   const { pathname } = useRouter();
   const pageProps = homeboxes.find((homebox) => homebox.link === pathname)!;
-  const [option, setOption] = useState("text-ada-001");
-
-  const changeOption = (inputOption: string) => {
-    setOption(inputOption);
-  };
 
   const [prompt, setPrompt] = useState<string | undefined>("");
   const [result, setResult] = useState<string | undefined>("");
@@ -23,11 +17,11 @@ export default function Essay() {
     setLoading(true);
     await openai
       .createCompletion({
-        model: option,
+        model: "text-davinci-003",
         prompt:
           "I am a highly intelligent article writing bot. I have a lot of knowledge on social commentary, literature, biology, physics, chemistry, religion, history, law, medicine, engineering, human psychology and computer science." +
           "\n" +
-          `Q: Write an article on ${prompt}`,
+          `Q: Write an article on ${prompt}, seperating every 3 sentences with \"###\"`,
         max_tokens: 4000,
         temperature: 1,
       })
@@ -46,9 +40,14 @@ export default function Essay() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-900 font-alpino text-white">
-      <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
-        <div className="lg:w-5/12 w-11/12 mx-auto">
+    <main
+      className=" font-alpino "
+      style={{
+        background: `linear-gradient(to bottom, ${pageProps.colorOne} 1%, #eee 10%, #eee 100%)`,
+      }}
+    >
+      <div className="max-w-[1600px] py-16 flex justify-between mx-auto flex-wrap w-[95%] ">
+        <div className="lg:w-5/12 w-11/12 mx-auto sticky top-0">
           <Navbar color={pageProps.colorOne} />
           <Prompt
             colorOne={pageProps.colorOne}
@@ -69,13 +68,8 @@ export default function Essay() {
             no={pageProps.no}
             title={pageProps.title}
           />
-          <Options
-            color={pageProps.colorOne}
-            option={option}
-            setOption={changeOption}
-          />
           <textarea
-            placeholder="Enter the text you want to generate a simplified version for here."
+            placeholder="Enter the text you want the topic you want an essay on here."
             className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none"
             onChange={(e) => setPrompt(e.target.value)}
           ></textarea>
@@ -103,8 +97,12 @@ export default function Essay() {
           {result !== "" ? (
             <>
               <button
-                onClick={() => window.navigator.clipboard.writeText(result!)}
-                className="mb-3 self-end mt-8 p-2 font-medium"
+                onClick={() =>
+                  window.navigator.clipboard.writeText(
+                    result!.replaceAll("###", "")
+                  )
+                }
+                className="mb-3 self-end mt-8 p-2 text-white font-medium"
                 style={{ backgroundColor: pageProps.colorOne }}
               >
                 Copy Text
@@ -112,16 +110,16 @@ export default function Essay() {
               <div
                 className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none "
                 dangerouslySetInnerHTML={{
-                  __html: `<p>${result}</p>`,
+                  __html: `<p>${result?.replaceAll("###", "<br/><br/>")}</p>`,
                 }}
               ></div>
             </>
           ) : null}
           {error !== "" ? (
             <div
-              className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none mt-8"
+              className="min-h-[150px] text-xl p-2 w-full resize-none mt-8 bg-red-500 text-white"
               dangerouslySetInnerHTML={{
-                __html: `<p className="bg-red-500">${error}</p>`,
+                __html: `<p>${error}</p>`,
               }}
             ></div>
           ) : null}
