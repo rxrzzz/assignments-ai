@@ -22,7 +22,7 @@ export default function Math() {
         prompt:
           "I am a bot. I am highly profecient in solving mathematical related problems and equations. I am profecient in algebra, calculus and trigonometry." +
           "\n" +
-          'Explain step by step how to arrive at the answer to this math question. Seperate each step by "###": ' +
+          'Explain step by step how to arrive at the answer to this math question. Seperate each step by "###". If the question given is not math related, i return "I only answer math questions.": ' +
           `${prompt}`,
         max_tokens: 1000,
         temperature: 1,

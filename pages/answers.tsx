@@ -1,18 +1,12 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Navbar } from "../components/Navbar";
-import { Options } from "../components/options";
 import { Prompt } from "../components/Prompt";
 import { homeboxes, openai } from "../utils";
 
 export default function Extract() {
   const { pathname } = useRouter();
   const pageProps = homeboxes.find((homebox) => homebox.link === pathname)!;
-  const [option, setOption] = useState("text-ada-001");
-
-  const changeOption = (inputOption: string) => {
-    setOption(inputOption);
-  };
 
   const [prompt, setPrompt] = useState<string | undefined>("");
   const [result, setResult] = useState<string | undefined>("");
@@ -23,7 +17,7 @@ export default function Extract() {
     setLoading(true);
     await openai
       .createCompletion({
-        model: option,
+        model: "text-davinci-003",
         prompt:
           'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you a short and concise answer in one sentence. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with "I do not have an answer to that question".' +
           "\n" +
@@ -46,8 +40,13 @@ export default function Extract() {
   }
 
   return (
-    <main className="min-h-screen  font-alpino text-white bg-[#0c0c0c]">
-      <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
+    <main
+      className=" font-alpino min-h-screen"
+      style={{
+        background: `linear-gradient(to bottom, ${pageProps.colorOne} 1%, #eee 10%, #eee 100%)`,
+      }}
+    >
+      <div className="max-w-[1600px] py-16 flex justify-between mx-auto flex-wrap w-[95%] ">
         <div className="lg:w-5/12 w-11/12 mx-auto">
           <Navbar color={pageProps.colorOne} />
           <Prompt
@@ -58,13 +57,9 @@ export default function Extract() {
             no={pageProps.no}
             title={pageProps.title}
           />
-          <Options
-            color={pageProps.colorOne}
-            option={option}
-            setOption={changeOption}
-          />
           <textarea
-            placeholder="Enter the text you want to generate a simplified version for here."
+            maxLength={300}
+            placeholder="Enter the text you want to get an answet to here. (Maximum character length of 300 letters)"
             className="min-h-[150px] text-xl p-2 bg-slate-800 w-full text-white resize-none"
             onChange={(e) => setPrompt(e.target.value)}
           ></textarea>
@@ -93,7 +88,7 @@ export default function Extract() {
             <>
               <button
                 onClick={() => window.navigator.clipboard.writeText(result!)}
-                className="mb-3 self-end mt-8 p-2 font-medium"
+                className="mb-3 self-end mt-8 p-2 font-medium text-white"
                 style={{ backgroundColor: pageProps.colorOne }}
               >
                 Copy Text

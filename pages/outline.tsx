@@ -8,11 +8,6 @@ import { homeboxes, openai } from "../utils";
 export default function Outline() {
   const { pathname } = useRouter();
   const pageProps = homeboxes.find((homebox) => homebox.link === pathname)!;
-  const [option, setOption] = useState("text-ada-001");
-
-  const changeOption = (inputOption: string) => {
-    setOption(inputOption);
-  };
 
   const [prompt, setPrompt] = useState<string | undefined>("");
   const [result, setResult] = useState<string | undefined>("");
@@ -23,7 +18,7 @@ export default function Outline() {
     setLoading(true);
     await openai
       .createCompletion({
-        model: option,
+        model: "text-davinci-003",
         prompt: "Create an outline for an essay about" + " " + `${prompt}`,
         max_tokens: 500,
         temperature: 1,
@@ -43,8 +38,13 @@ export default function Outline() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-900 font-alpino text-white">
-      <div className="max-w-[1200px] py-16 flex justify-between mx-auto flex-wrap">
+    <main
+      className=" font-alpino min-h-screen"
+      style={{
+        background: `linear-gradient(to bottom, ${pageProps.colorOne} 1%, #eee 10%, #eee 100%)`,
+      }}
+    >
+      <div className="max-w-[1600px] py-16 flex justify-between mx-auto flex-wrap w-[95%] ">
         <div className="lg:w-5/12 w-11/12 mx-auto">
           <Navbar color={pageProps.colorOne} />
           <Prompt
@@ -61,11 +61,6 @@ export default function Outline() {
             examplePrompt="The dangers of smoking on women."
             no={pageProps.no}
             title={pageProps.title}
-          />
-          <Options
-            color={pageProps.colorOne}
-            option={option}
-            setOption={changeOption}
           />
           <textarea
             maxLength={200}
@@ -98,7 +93,7 @@ export default function Outline() {
             <>
               <button
                 onClick={() => window.navigator.clipboard.writeText(result!)}
-                className="mb-3 self-end mt-8 p-2 font-medium"
+                className="mb-3 self-end mt-8 p-2 font-medium text-white"
                 style={{ backgroundColor: pageProps.colorOne }}
               >
                 Copy Text
